@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sv.pghms.util.Constant;
 import com.sv.pghms.util.Utilities;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
@@ -55,22 +56,22 @@ public class MainController {
 		
 		TUser user = adminService.getUserByLoginID(Utilities.getCurrentLoginID());
 		String userPassword = user.getUserPassword();
-		String mismatch = "Your previous password doesn't match.";
+		/*String mismatch = "Your previous password doesn't match.";
 		String mismatchNew = "Your new password and retyped password doesn't match.";
-		String match = "Congratulation! You have successfully changed your password.";
+		String match = "Congratulation! You have successfully changed your password.";*/
 		if(!(userPassword.equals(currentPassword))) {
 			
-			model.addAttribute("mismatchedPassword",mismatch);
+			model.addAttribute("mismatchedPassword",Constant.mismatchedPassword);
 		}
 		else {
 			if(!(newPassword.equals(retypeNewPassword))){
 				
-				model.addAttribute("mismatchedNewPassword",mismatchNew);
+				model.addAttribute("mismatchedNewPassword",Constant.mismatchedNewPassword);
 			}
 			else {
 				user.setUserPassword(retypeNewPassword);
 				adminService.insertUser(user);
-				model.addAttribute("matchedNewPassword",match);
+				model.addAttribute("matchedNewPassword",Constant.matchedNewPassword);
 			}
 		}
 				

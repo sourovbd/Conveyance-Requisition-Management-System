@@ -26,6 +26,7 @@ public class CourseController {
 	
 	@Autowired
 	private AdminService adminService;
+	String globalCourseNo, globalBatchNo;
 	
 	//For showing CourseDetailsEntry.html page
 	@RequestMapping(value="/saveCourseDetails", method=RequestMethod.GET)
@@ -50,7 +51,8 @@ public class CourseController {
 	public String SaveCourseDetails(@ModelAttribute("courseDetailsForm") TCourseDetails courseDetailsForm){
 		
 		try{
-			
+			System.out.println("test: "+globalCourseNo+" "+globalBatchNo );
+			adminService.deleteSingleCourse(globalCourseNo, globalBatchNo);
 			adminService.insertCourseDetails(courseDetailsForm);
 			
 		}catch(Exception e) {
@@ -106,6 +108,8 @@ public class CourseController {
 		ModelAndView model = new ModelAndView("CourseDetailsEntry");
 		TCourseDetails courseDetailsForm = new TCourseDetails();
 		List<TCourseDetails> courseDetailsFormList = new ArrayList<TCourseDetails>();
+		globalCourseNo = courseNo;
+		globalBatchNo = batchNo;
 		
 		try{
 			courseDetailsFormList = adminService.getSingleCourse(courseNo, batchNo);
