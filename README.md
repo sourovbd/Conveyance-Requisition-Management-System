@@ -2,7 +2,7 @@
 
 This part will be for integration between BIRT report and spring project.
 
-Any question, plz contact with the below persons:
+Any question, plz contact with us:
 
 Md. Atequr Rahman
 skype: sourovbd_sust
