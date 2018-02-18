@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="Layout :: headerFragment">
+
+</head>
+	<body>
+		<script type="text/javascript" src="/CMS/resources/js/jquery-1.11.0.js"></script>		
+		<script type="text/javascript" src="/CMS/resources/js/page-scripts/adminEntry.js"></script>
+		
+		<div th:substituteby="Layout :: defaultFragment"></div>
+			<div id="body">
+			<fieldset>
+				<legend>Conveyance view</legend>
+			</fieldset>	
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Amount</th>
+								<th>Details</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="adminView : ${adminViewList}">
+								<td th:text="${adminView.AdminViewId}"></td>
+								<td th:text="${adminView.AdminViewName}"></td>
+								<td th:text="${adminView.AdminViewAmount}"></td>
+								<td><a th:href="@{'/main/details/'+${adminView.AdminViewId}}">Details</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<input type="hidden" id="userIdHolder" name="userIdHolder" th:value="${userId}"/>
+					<p></p>
+				</div>
+			<br/><br/>
+			<p style="font-weight: bold;font-size: 16px;margin-bottom: 10px;" th:text="${detailsViewHeading}"></p>
+			<fieldset>
+				<div>
+					<table id="adminEntryTable">
+					<thead>
+							<tr>
+								<th><input type="checkbox" id="selectAll"/></th>
+								<th>Conveyance Date</th>
+								<th>Submit Date</th>
+								<th>Type</th>
+								<th>Amount</th>
+								<th>Details</th>
+							</tr>
+						</thead>
+						<tbody id="adminEntryTableBody">
+							<tr th:each="expense : ${expenseDetailsList}">
+								<td><input type="checkbox"/></td>
+								<td th:text="${expense.expenseConveyanceDate}"></td>
+								<td th:text="${expense.expenseSubmitDate}"></td>
+								<td th:text="${expense.expenseType}"></td>
+								<td th:text="${expense.expenseAmount}"></td>
+								<td th:text="${expense.expenseDetails}"></td>
+								<td th:text="${expense.expenseId}" style="display: none;" ></td> 
+							</tr>
+						</tbody>
+						<!-- <tbody id="partialAdminEntryTableBody">
+							
+						</tbody> -->
+					</table>
+				</div>
+				<br/>
+				<div>
+					<input class="button" type="button" value="Approve" onclick="approve()"/> 
+					<input class="button" type="button" value="Reject" onclick="reject()"/> 
+				</div>
+			</fieldset>
+			</div>
+		<br/><br/><br/>
+		<div th:substituteby="Layout :: footerFragment"></div>
+	</body>
+</html>
