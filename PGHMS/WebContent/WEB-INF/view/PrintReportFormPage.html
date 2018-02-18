@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="Layout :: headerFragment">
+
+</head>
+<body>
+	<div th:substituteby="Layout :: defaultFragment"></div>
+
+	<div id="body">
+		<fieldset>
+			<legend>Report Query Form</legend>
+			<div id="box">
+				<form action="#" th:action="@{/main/printReport}" method="POST">
+				<p>
+					<label>Department Name</label>
+					<input 	type="text" id="departmentName" name="departmentName"  value="Computer Science & Engineering"/>
+				</p>
+				<p>
+					<label>Semester Number</label>
+					<input 	type="text" id="semesterNumber" name="semesterNumber"  value="1"/>
+				</p>
+				<p>
+					<label>Exam Held Month and Year</label>
+					<input 	type="text" id="examHeldYear" name="examHeldYear"  value="May, 2017"/> <!-- just for test -->
+				</p>
+				<p>
+					<label>Course Number</label>
+					<input type="text" id="courseNumber" name="courseNumber" value="CSE150"/> <!-- just for test -->
+				</p>
+				<p>
+					<label>Chairman Name</label>
+					<input type="text" id="chairmanName" name="chairmanName" value="Md. Reza Selim"/>
+				</p>
+				<p>
+					<button name="Submit" class="formbutton" type="submit">Print Report</button>
+				</p>
+				</form>
+			</div>
+		</fieldset>
+		<br/><br/>
+	</div>
+	<br/><br/><br/>
+	<div th:substituteby="Layout :: footerFragment"></div>
+</body>
+</html>
