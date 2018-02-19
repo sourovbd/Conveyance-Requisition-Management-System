@@ -220,5 +220,12 @@
 		<artifactId>groovy-all</artifactId>
 		<version>1.5.5</version>
 	</dependency>
+	<!-- BIRT runtime -->
+	<!-- https://mvnrepository.com/artifact/org.eclipse.birt.runtime/org.eclipse.birt.runtime -->
+	<dependency>
+	    <groupId>org.eclipse.birt.runtime</groupId>
+	    <artifactId>org.eclipse.birt.runtime</artifactId>
+	    <version>4.5.0</version>
+	</dependency>
   </dependencies>
 </project>
