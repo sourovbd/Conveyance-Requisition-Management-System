@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans" 
+       	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       	xmlns:p="http://www.springframework.org/schema/p" 
+       	xmlns:tx="http://www.springframework.org/schema/tx"
+       	xmlns:context="http://www.springframework.org/schema/context"
+       	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<context:annotation-config />		
+  
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://asdserver03:1433;databaseName=CMS" />
+		<property name="username" value="asdinc" />
+		<property name="password" value="ASD007" />
+	</bean>
+    
+    <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation">
+            <value>classpath:hibernate.cfg.xml</value>
+        </property>
+		<property name="hibernateProperties">
+			<props>
+				
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.connection.pool_size">1</prop>
+     			<prop key="hibernate.hbm2ddl.auto">update</prop>
+     			<prop key="hibernate.connection.SetBigStringTryBlob">true</prop> 
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="expenseService" class="com.asd.cms.service.ExpenseServiceImpl">
+	</bean> 
+	
+	<bean id="expenseDao" class="com.asd.cms.dao.ExpenseDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="requisitionService" class="com.asd.cms.service.RequisitionServiceImpl">
+	</bean> 
+	
+	<bean id="requisitionDao" class="com.asd.cms.dao.RequisitionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="adminService" class="com.asd.cms.service.AdminServiceImpl">
+	</bean> 
+	
+	<bean id="adminDao" class="com.asd.cms.dao.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="hrService" class="com.asd.cms.service.HrServiceImpl">
+	</bean> 
+	
+	<bean id="hrDao" class="com.asd.cms.dao.HrDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="customUserDetailsService" class="com.asd.cms.service.CustomUserDetailsServiceImpl">
+	</bean> 
+
+	<bean id="customUserDetailsDao" class="com.asd.cms.dao.CustomUserDetailsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="userService" class="com.asd.cms.service.UserServiceImpl">
+	</bean> 
+	
+	<bean id="userDao" class="com.asd.cms.dao.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="userWiseReportService" class="com.asd.cms.service.UserWiseReportServiceImpl">
+	</bean> 
+	
+	<bean id="userWiseDao" class="com.asd.cms.dao.UserWiseDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />	
+	
+	<bean id="transactionManager"  
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory" />  
+    </bean> 
+	
+</beans>

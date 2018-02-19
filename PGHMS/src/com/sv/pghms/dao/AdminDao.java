@@ -2,7 +2,8 @@ package com.sv.pghms.dao;
 
 import java.util.List;
 
-import com.sv.pghms.model.TBatchEntry;
+import org.hibernate.Query;
+
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.model.TUser;
@@ -10,6 +11,7 @@ import com.sv.pghms.model.TUser;
 public interface AdminDao {
 	
 	//*** Result ***\\
+	public boolean insertBatch(TResultForm resultForm);
 	public boolean deletePreviousRow(String regNoFromPathVariable, String courseNoFromPathVariable, String examHeldFromPathVariable);
 	public boolean deletePreviousROW(String regNo, String courseNo, String batchNo);
 	public boolean insertResult(TResultForm resultForm);
@@ -26,6 +28,12 @@ public interface AdminDao {
 	public boolean deleteSingleCourse(String courseNo, String batchNo);
 	public boolean insertCourseDetails(TCourseDetails courseDetails);
 	public List<TCourseDetails> getCourseDetailsList();
+	public List<String> getcourseDetailsList_courseNo();
+	public List<String> getcourseDetailsList_examHeld();
+	public List<String> getcourseDetailsList_batchNo();
+	/*public List<TCourseDetails> getcourseDetailsList_courseNo();
+	public List<TCourseDetails> getcourseDetailsList_examHeld();
+	public List<TCourseDetails> getcourseDetailsList_batchNo();*/
 	public List<TCourseDetails> getCourseListFormQuery(String courseNo,String examHeld, String batchNo);
 	
 	//*** User ***\\
@@ -37,12 +45,4 @@ public interface AdminDao {
 	public boolean activateUser(String userLoginId);
 	public boolean deactivateUser(String userLoginId);
 	
-	//*** Batch Entry ***\\
-	public List<TBatchEntry> getBatch();
-	public boolean insertBatch(TResultForm resultForm);
-	public TBatchEntry getSinglePersonFromBatch(String id);
-	public boolean deleteSinglePersonFromBatch(String id);
-	public List<TBatchEntry> getBatchListFormQuery(String batchNo);
-	
-
 }

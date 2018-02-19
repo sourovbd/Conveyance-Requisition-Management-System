@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+					<!-- Related to the connection START -->
+    <session-factory name="sessionFactory">
+        <!-- <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.password">ASD007</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=CMS</property>
+        <property name="hibernate.connection.username">sa</property> -->
+        
+        			<!-- Related to hibernate properties START -->
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        
+        			<!-- Related to mapping START -->
+        <mapping class="com.asd.cms.model.TExpense" />
+        <mapping class="com.asd.cms.model.TUser" />
+        <mapping class="com.asd.cms.model.TRequisition" />
+    </session-factory>
+</hibernate-configuration>

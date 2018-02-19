@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sv.pghms.model.TBatchEntry;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.service.AdminService;
@@ -34,9 +33,6 @@ public class ResultController {
 	//For showing ShowResultPage.html
 	@RequestMapping(value="/showResultWithParam", method=RequestMethod.GET)
 	public String ShowResultWithParam(Model model,@RequestParam("courseNo") String courseNo, @RequestParam("examHeld") String examHeld, @RequestParam("batchNo") String batchNo){
-		
-		TBatchEntry batchFromQuery = new TBatchEntry();
-		List<TBatchEntry> batchListFromQuery  = new ArrayList<TBatchEntry>();
 		
 		TCourseDetails courseFromQuery = new TCourseDetails();
 		List<TCourseDetails> courseListFromQuery = new ArrayList<TCourseDetails>();
