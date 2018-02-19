@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sv.pghms.model.TBatchEntry;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.model.TUser;
@@ -41,7 +40,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			tx = session.beginTransaction();
 			
-			session.createSQLQuery("DELETE FROM pghms.t_result WHERE t_regNo = '"+regNoFromPathVariable+"' AND t_courseNo = '"+courseNoFromPathVariable+"' AND t_examHeld = '"+examHeldFromPathVariable+"'").addEntity(TResultForm.class).executeUpdate();
+			session.createSQLQuery("DELETE FROM tsms.t_result WHERE t_regNo = '"+regNoFromPathVariable+"' AND t_courseNo = '"+courseNoFromPathVariable+"' AND t_examHeld = '"+examHeldFromPathVariable+"'").addEntity(TResultForm.class).executeUpdate();
 			retVal = true;
 			session.getTransaction().commit();
 			
@@ -66,7 +65,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			tx = session.beginTransaction();
 			
-			session.createSQLQuery("DELETE FROM pghms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).executeUpdate();
+			session.createSQLQuery("DELETE FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).executeUpdate();
 			retVal = true;
 			session.getTransaction().commit();
 			
@@ -206,7 +205,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();
-			resultFormList =  session.createSQLQuery("SELECT * FROM pghms.t_result WHERE t_courseNo = 'CSE 375' AND t_examHeld = 'May 2017'").addEntity(TResultForm.class).list();		
+			resultFormList =  session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = 'CSE 375' AND t_examHeld = 'May 2017'").addEntity(TResultForm.class).list();		
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -230,7 +229,7 @@ public class AdminDaoImpl implements AdminDao{
 		List<TResultForm> resultList = new ArrayList<TResultForm>();
 		try {
 			tx = session.beginTransaction();
-			resultList = session.createSQLQuery("SELECT * FROM pghms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 
+			resultList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 
 			tx.commit();
 			
 		}catch(Exception e) {
@@ -332,7 +331,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();
-			courseDetailsList =  session.createQuery("from TCourseDetails").list();
+			courseDetailsList =  session.createQuery("from TCourseDetails order by courseNo").list();
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -350,30 +349,7 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	//********************************* Batch Entry ***************************************\\
 	
-	public List<TBatchEntry> getBatch(){
-		
-		session = sessionFactory.openSession();
-		List<TBatchEntry> batchDetailsList = new ArrayList<TBatchEntry>(); 
-		
-		 try {
-			
-			tx = session.beginTransaction();
-			batchDetailsList =  session.createQuery("from TBatchEntry").list();
-			session.getTransaction().commit();
-			
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-			session.getTransaction().rollback();			
-		}
-		finally {
-			
-			session.clear();
-			session.flush();
-			session.close();			
-		}
-		return batchDetailsList;
-	}
+	
 	public boolean insertBatch(TResultForm resultForm){
 		boolean retVal = false;
 		session = sessionFactory.openSession(); 
@@ -397,57 +373,7 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return retVal;
 	}
-	public TBatchEntry getSinglePersonFromBatch(String id){
-		
-		session = sessionFactory.openSession();
-		TBatchEntry batchDetails= new TBatchEntry(); 
-		
-		 try {
-			
-			tx = session.beginTransaction();
-			batchDetails =  (TBatchEntry) session.get(TBatchEntry.class, id);
-			session.getTransaction().commit();
-			
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-			session.getTransaction().rollback();			
-		}
-		finally {
-			
-			session.clear();
-			session.flush();
-			session.close();			
-		}
-		return batchDetails;
-	}
-	public boolean deleteSinglePersonFromBatch(String id){
-		
-		boolean retVal = false;
-		session = sessionFactory.openSession();
-		TBatchEntry singlePersonFrombatch = new TBatchEntry(); 
-		
-		 try {
-			
-			tx = session.beginTransaction();
-			singlePersonFrombatch =  (TBatchEntry) session.get(TBatchEntry.class, id);
-			session.delete(singlePersonFrombatch);
-			retVal = true;
-			session.getTransaction().commit();
-			
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-			session.getTransaction().rollback();			
-		}
-		finally {
-			
-			session.clear();
-			session.flush();
-			session.close();			
-		}
-		return retVal;
-	}
+	
 	@Override
 	public List<TCourseDetails> getCourseListFormQuery(String courseNo,String examHeld, String batchNo) {
 		
@@ -456,7 +382,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();			
-			courseDetailsList = session.createSQLQuery("SELECT * FROM pghms.t_coursedetails WHERE t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TCourseDetails.class).list(); 			
+			courseDetailsList = session.createSQLQuery("SELECT * FROM tsms.t_coursedetails WHERE t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TCourseDetails.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -480,7 +406,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();			
-			resultFormList = session.createSQLQuery("SELECT * FROM pghms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
+			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -496,30 +422,6 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return resultFormList;
 	}
-	@Override
-	public List<TBatchEntry> getBatchListFormQuery(String batchNo) {
-		
-		session = sessionFactory.openSession(); 
-		List<TBatchEntry> batchListFromQuery = new ArrayList<TBatchEntry>();
-		try {
-			
-			tx = session.beginTransaction();
-			batchListFromQuery =  session.createSQLQuery("SELECT * FROM pghms.t_batchentry WHERE t_regNo LIKE '2008%'").addEntity(TBatchEntry.class).list(); 
-			session.getTransaction().commit();
-			
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-			session.getTransaction().rollback();			
-		}
-		finally {
-			
-			session.clear();
-			session.flush();
-			session.close();			
-		}
-		return batchListFromQuery;
-	}
 
 	@Override
 	public boolean deleteSingleCourse(String courseNo, String batchNo) {
@@ -528,7 +430,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			tx = session.beginTransaction();
 			
-			session.createSQLQuery("DELETE FROM pghms.t_coursedetails WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).executeUpdate();
+			session.createSQLQuery("DELETE FROM tsms.t_coursedetails WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).executeUpdate();
 			retVal = true;
 			session.getTransaction().commit();
 			
@@ -553,7 +455,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			tx = session.beginTransaction();
 			
-			session.createSQLQuery("DELETE FROM pghms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).executeUpdate();
+			session.createSQLQuery("DELETE FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).executeUpdate();
 			retVal = true;
 			session.getTransaction().commit();
 			
@@ -579,7 +481,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();			
-			courseDetailsList = session.createSQLQuery("SELECT * FROM pghms.t_coursedetails WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TCourseDetails.class).list(); 			
+			courseDetailsList = session.createSQLQuery("SELECT * FROM tsms.t_coursedetails WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TCourseDetails.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -634,7 +536,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 		try{
 			tx = session.beginTransaction();
-			user = (TUser) session.createSQLQuery("SELECT * from pghms.t_user WHERE user_LoginID = '"+id+"'").addEntity(TUser.class).uniqueResult();
+			user = (TUser) session.createSQLQuery("SELECT * from tsms.t_user WHERE user_LoginID = '"+id+"'").addEntity(TUser.class).uniqueResult();
 			tx.commit();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -655,7 +557,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 		try{
 			tx = session.beginTransaction();
-			session.createSQLQuery("DELETE from pghms.t_user WHERE user_LoginID = '"+id+"'").addEntity(TUser.class).executeUpdate();
+			session.createSQLQuery("DELETE from tsms.t_user WHERE user_LoginID = '"+id+"'").addEntity(TUser.class).executeUpdate();
 			retVal = true; 
 			tx.commit();
 		}catch(Exception e){
@@ -732,7 +634,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();			
-			resultFormList = session.createSQLQuery("SELECT * FROM pghms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
+			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -756,7 +658,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();			
-			resultFormList = session.createSQLQuery("SELECT * FROM pghms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
+			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -772,4 +674,80 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return resultFormList;
 	}
+
+	@Override
+	public List<String> getcourseDetailsList_courseNo() {
+		session = sessionFactory.openSession(); 
+		List<String> courseDetailsList_courseNo = new ArrayList<String>();
+		//Query courseDetailsList_courseNo = null;
+		try {
+			
+			tx = session.beginTransaction();
+			courseDetailsList_courseNo =  session.createQuery("select distinct courseNo from TCourseDetails order by courseNo").list();
+			session.getTransaction().commit();
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			session.getTransaction().rollback();			
+		}
+		finally {
+			
+			session.clear();
+			session.flush();
+			session.close();			
+		}
+		return courseDetailsList_courseNo;
+	}
+
+	@Override
+	public List<String> getcourseDetailsList_examHeld() {
+		session = sessionFactory.openSession(); 
+		List<String> courseDetailsList_examHeld = new ArrayList<String>();
+		//Query courseDetailsList_examHeld = null;
+		try {
+			
+			tx = session.beginTransaction();
+			courseDetailsList_examHeld =  session.createQuery("select distinct examHeld from TCourseDetails order by examHeld").list();
+			session.getTransaction().commit();
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			session.getTransaction().rollback();			
+		}
+		finally {
+			
+			session.clear();
+			session.flush();
+			session.close();			
+		}
+		return courseDetailsList_examHeld;
+	}
+
+	@Override
+	public List<String> getcourseDetailsList_batchNo() {
+		session = sessionFactory.openSession(); 
+		List<String> courseDetailsList_batchNo = new ArrayList<String>();
+		//String[] courseDetailsList_batchNo;
+		try {
+			
+			tx = session.beginTransaction();
+			courseDetailsList_batchNo =  session.createQuery("select distinct batchNo from TCourseDetails order by batchNo").list();
+			session.getTransaction().commit();
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			session.getTransaction().rollback();			
+		}
+		finally {
+			
+			session.clear();
+			session.flush();
+			session.close();			
+		}
+		return courseDetailsList_batchNo;
+	}
+
 }

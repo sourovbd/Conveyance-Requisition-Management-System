@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sv.pghms.model.TBatchEntry;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.service.AdminService;
@@ -36,11 +36,17 @@ public class StudentRegistrationController {
 		TResultForm resultForm = new TResultForm();
 		List<TResultForm> resultFormList = new ArrayList<TResultForm>();
 		
-		TCourseDetails courseDetails = new TCourseDetails();
-		List<TCourseDetails> courseDetailsList = new ArrayList<TCourseDetails>();
+		String courseDetails = new String();
+		List<String> courseDetailsList_courseNo = new ArrayList<String>();
+		List<String> courseDetailsList_examHeld = new ArrayList<String>();
+		List<String> courseDetailsList_batchNo = new ArrayList<String>();
 				
 		try{
-			courseDetailsList = adminService.getCourseDetailsList();
+			
+			courseDetailsList_courseNo = adminService.getcourseDetailsList_courseNo();
+			courseDetailsList_examHeld = adminService.getcourseDetailsList_examHeld();
+			courseDetailsList_batchNo = adminService.getcourseDetailsList_batchNo();
+			
 			resultFormList = adminService.getresultListFromQuery(courseNoGlobal,examHeldGlobal,batchNoGlobal);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -50,7 +56,9 @@ public class StudentRegistrationController {
 		model.addAttribute("resultFormList", resultFormList);
 		
 		model.addAttribute("courseDetails",courseDetails);
-		model.addAttribute("courseDetailsList", courseDetailsList);
+		model.addAttribute("courseDetailsList_courseNo", courseDetailsList_courseNo);
+		model.addAttribute("courseDetailsList_examHeld", courseDetailsList_examHeld);
+		model.addAttribute("courseDetailsList_batchNo", courseDetailsList_batchNo);
 		
 		return "StudentEntry";
 	}

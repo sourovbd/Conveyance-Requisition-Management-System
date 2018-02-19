@@ -24,9 +24,9 @@
 					<!-- <input 	type="text" id="courseNo" name="courseNo"  />  -->
 					<select th:field="*{courseNo}">
                          <option value=""></option>
-                         <option th:each="courseDetails : ${courseDetailsList}"
-                            th:value="${courseDetails.courseNo}"
-                            th:utext="${courseDetails.courseNo}"/>
+                         <option th:each="courseDetails : ${courseDetailsList_courseNo}"
+                            th:value="${courseDetails}"
+                            th:utext="${courseDetails}"/>
                   </select>
 				</p>
 				<p>
@@ -34,9 +34,9 @@
 					<!-- <input 	type="text" id="examHeld" name="examHeld"  /> --> 
 					<select th:field="*{examHeld}">
                          <option value=""></option>
-                         <option th:each="courseDetails : ${courseDetailsList}"
-                            th:value="${courseDetails.examHeld}"
-                            th:utext="${courseDetails.examHeld}"/>
+                         <option th:each="courseDetails : ${courseDetailsList_examHeld}"
+                            th:value="${courseDetails}"
+                            th:utext="${courseDetails}"/>
                   </select>
 				</p>
 				<p>
@@ -44,9 +44,9 @@
 					<!-- <input 	type="text" id="batchNo" name="batchNo"  /> -->
 					<select th:field="*{batchNo}">
                          <option value=""></option>
-                         <option th:each="courseDetails : ${courseDetailsList}"
-                            th:value="${courseDetails.batchNo}"
-                            th:utext="${courseDetails.batchNo}"/>
+                         <option th:each="courseDetails : ${courseDetailsList_batchNo}"
+                            th:value="${courseDetails}"
+                            th:utext="${courseDetails}"/>
                   </select>
 				</p>
 				<p>

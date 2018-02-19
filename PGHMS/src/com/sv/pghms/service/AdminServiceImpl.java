@@ -2,11 +2,11 @@ package com.sv.pghms.service;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sv.pghms.dao.AdminDao;
-import com.sv.pghms.model.TBatchEntry;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.model.TUser;
@@ -66,27 +66,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<TBatchEntry> getBatch() {
-		
-		return adminDao.getBatch();
-	}
-
-	@Override
 	public boolean insertBatch(TResultForm resultForm) {
 		
 		return adminDao.insertBatch(resultForm);
-	}
-
-	@Override
-	public TBatchEntry getSinglePersonFromBatch(String id) {
-		
-		return adminDao.getSinglePersonFromBatch(id);
-	}
-
-	@Override
-	public boolean deleteSinglePersonFromBatch(String id) {
-		
-		return adminDao.deleteSinglePersonFromBatch(id);
 	}
 
 	@Override
@@ -95,11 +77,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.getCourseListFormQuery(courseNo, examHeld, batchNo);
 	}
 
-	@Override
-	public List<TBatchEntry> getBatchListFormQuery(String batchNo) {
-		
-		return adminDao.getBatchListFormQuery(batchNo);
-	}
 
 	@Override
 	public List<TResultForm> getresultListFromQuery(String courseNo, String examHeld, String batchNo) {
@@ -177,6 +154,24 @@ public class AdminServiceImpl implements AdminService {
 	public List<TResultForm> getresultListFor3Query(String regNo, String courseNo, String batchNo) {
 		
 		return adminDao.getresultListFor3Query(regNo, courseNo, batchNo);
+	}
+
+	@Override
+	public List<String> getcourseDetailsList_courseNo() {
+		
+		return adminDao.getcourseDetailsList_courseNo();
+	}
+
+	@Override
+	public List<String> getcourseDetailsList_examHeld() {
+		
+		return adminDao.getcourseDetailsList_examHeld();
+	}
+
+	@Override
+	public List<String> getcourseDetailsList_batchNo() {
+		
+		return adminDao.getcourseDetailsList_batchNo();
 	}
 
 }

@@ -14,7 +14,6 @@
         <mapping class="com.sv.pghms.model.TUser" />
         <mapping class="com.sv.pghms.model.TResultForm" />
         <mapping class="com.sv.pghms.model.TCourseDetails" />
-        <mapping class="com.sv.pghms.model.TBatchEntry" />
        
     </session-factory>
 </hibernate-configuration>
