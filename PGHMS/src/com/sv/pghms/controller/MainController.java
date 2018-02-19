@@ -77,6 +77,25 @@ public class MainController {
 				
 		return "PasswordResetPage";
 	}
+	
+	//Report print
+	@RequestMapping(value="/printReport", method=RequestMethod.GET)
+	public String PrintReportPage() {
+		return "PrintReportFormPage";
+	}
+	
+	@RequestMapping(value="/printReport", method=RequestMethod.POST)
+	public String PrintReport(Model model,
+			@RequestParam("departmentName") String departmentName,
+			@RequestParam("semesterNumber") String semesterNumber,
+			@RequestParam("examHeldYear") String examHeldYear,
+			@RequestParam("courseNumber") String courseNumber,
+			@RequestParam("chairmanName") String chairmanName) {
+		//apply some command to fill up BIRT report parameter and execute to show the report
+		
+		return "HomePage";
+	}
+	
 	@RequestMapping(value="/createUser",method=RequestMethod.GET)
 	public ModelAndView UserForm() {
 		
