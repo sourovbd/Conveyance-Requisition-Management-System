@@ -32,15 +32,18 @@ public class MainController {
 	public String HomePage(Model model){
 		
 		TCourseDetails courseDetails = new TCourseDetails();
-		List<TCourseDetails> courseDetailsList = new ArrayList<TCourseDetails>();
+		List<String> courseDetailsListCourseNo = new ArrayList<String>();
+		List<String> courseDetailsListBatchNo = new ArrayList<String>();
 		
 		try{
-			courseDetailsList = adminService.getCourseDetailsList();
+			courseDetailsListCourseNo = adminService.getcourseDetailsList_courseNo();
+			courseDetailsListBatchNo = adminService.getcourseDetailsList_batchNo();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		model.addAttribute("courseDetails",courseDetails);
-		model.addAttribute("courseDetailsList", courseDetailsList);
+		model.addAttribute("courseDetailsListCourseNo", courseDetailsListCourseNo);
+		model.addAttribute("courseDetailsListBatchNo", courseDetailsListBatchNo);
 					
 		return "HomePage";
 	}	

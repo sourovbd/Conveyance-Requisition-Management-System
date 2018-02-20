@@ -16,7 +16,7 @@ public interface AdminService {
 	public boolean deletePreviousROW(String regNo, String courseNo, String batchNo);
 	public boolean insertResult(TResultForm resultForm);	
 	public List<TResultForm> getresultFormList();
-	public List<TResultForm> getresultListFromQuery(String courseNo, String examHeld, String batchNo);
+	public List<TResultForm> getresultListFromQuery(String courseNo, String batchNo);
 	public List<TResultForm> getresultListQuery(String courseNo, String batchNo);
 	public List<TResultForm> getresultListFor3Query(String regNo,String courseNo, String batchNo);
 	public List<TResultForm> getSingleResultForm(String regNo, String courseNo, String examHeld, String batchNo);
@@ -29,9 +29,6 @@ public interface AdminService {
 	public List<String> getcourseDetailsList_courseNo();
 	public List<String> getcourseDetailsList_examHeld();
 	public List<String> getcourseDetailsList_batchNo();
-	/*public List<TCourseDetails> getcourseDetailsList_courseNo();
-	public List<TCourseDetails> getcourseDetailsList_examHeld();
-	public List<TCourseDetails> getcourseDetailsList_batchNo();*/
 	public List<TCourseDetails> getSingleCourse(String courseNo,String batchNo);
 	public List<TCourseDetails> getCourseListFormQuery(String courseNo,String examHeld, String batchNo);	
 	public boolean deleteSingleCourse(String courseNo, String batchNo);

@@ -11,6 +11,7 @@
 			<legend>Result Edit Form</legend>
 			<div id="box">
 				<form action="#" th:action="@{/main/saveEditedResult}" th:object="${resultForm}" method="POST" >
+				<p style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${starMarkedfieldsAreRequired}" />
 				<p>
 					<label>Registration No.</label> 
 					<input 	type="text" id="regNo" name="regNo" th:field="*{regNo}" readonly="readonly" /> 
@@ -21,19 +22,19 @@
 				</p>
 				<p>
 					<label>Term test 1</label> 
-					<input 	type="text" id="tt1" name="tt1" th:field="*{tt1}" /> 
+					<input 	type="text" id="tt1" name="tt1" th:field="*{tt1}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<label>Term test 2</label> 
-					<input 	type="text" id="tt2" name="tt2" th:field="*{tt2}" /> <!--  -->
+					<input 	type="text" id="tt2" name="tt2" th:field="*{tt2}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<label>Attendance</label> 
-					<input 	type="text" id="attendance" name="attendance" th:field="*{attendance}" /> <!--  -->
+					<input 	type="text" id="attendance" name="attendance" th:field="*{attendance}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<label>Final</label> 
-					<input 	type="text" id="finalMark" name="finalMark" th:field="*{finalMark}" /> <!--  -->
+					<input 	type="text" id="finalMark" name="finalMark" th:field="*{finalMark}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<label>Course No.</label> 

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.service.AdminService;
+import com.sv.pghms.util.Constant;
 
 @Controller
 @RequestMapping("/main")
@@ -32,26 +33,18 @@ public class ResultController {
 	
 	//For showing ShowResultPage.html
 	@RequestMapping(value="/showResultWithParam", method=RequestMethod.GET)
-	public String ShowResultWithParam(Model model,@RequestParam("courseNo") String courseNo, @RequestParam("examHeld") String examHeld, @RequestParam("batchNo") String batchNo){
-		
-		TCourseDetails courseFromQuery = new TCourseDetails();
-		List<TCourseDetails> courseListFromQuery = new ArrayList<TCourseDetails>();
+	public String ShowResultWithParam(Model model,@RequestParam("courseNo") String courseNo, @RequestParam("batchNo") String batchNo){
 		
 		TResultForm resultForm = new TResultForm();
 		List<TResultForm> resultFormList = new ArrayList<TResultForm>();
 		
 		try{
-			courseListFromQuery = adminService.getCourseListFormQuery(courseNo, examHeld,batchNo);
-			System.out.println("courseListFromQuery: "+courseListFromQuery);
-			resultFormList = adminService.getresultListFromQuery(courseNo, examHeld,batchNo);
-			System.out.println("resultFormList: "+resultFormList);
+			resultFormList = adminService.getresultListQuery(courseNo, batchNo);
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 
-		model.addAttribute("courseFromQuery",courseFromQuery);
-		model.addAttribute("courseListFromQuery", courseListFromQuery);
 		model.addAttribute("resultForm",resultForm);
 		model.addAttribute("resultFormList", resultFormList);
 			
@@ -65,7 +58,7 @@ public class ResultController {
 		
 		try{
 			//resultFormList = adminService.getresultFormList();
-			resultFormList = adminService.getresultListFromQuery(courseNoGlobal,examHeldGlobal,batchNoGlobal);
+			resultFormList = adminService.getresultListFromQuery(courseNoGlobal,batchNoGlobal);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -87,21 +80,20 @@ public class ResultController {
 		courseNoFromPathVariable = courseNo;
 		examHeldFromPathVariable = examHeld;
 		batchNoFromPathVariable = batchNo;
-		
+		System.out.println(regNo+" "+courseNo+" "+examHeld+" "+batchNo);
 		try{
-			System.out.println("Before");
 			resultList = adminService.getSingleResultForm(regNo, courseNo, examHeld, batchNo);
 			Iterator it = resultList.iterator();
 			while(it.hasNext()){
 				resultForm = (TResultForm) it.next();
 			}
-			//System.out.println("After: ");
-			//System.out.println("Reg. no.: "+resultForm.getRegNo());
 		}catch(Exception e){
 			
 			e.printStackTrace();
 		}
 		model.addAttribute("resultForm",resultForm);
+		model.addAttribute("star",Constant.star);
+		model.addAttribute("starMarkedfieldsAreRequired",Constant.starMarkedfieldsAreRequired);
 		
 		return "EditResult";
 	}  
@@ -115,12 +107,15 @@ public class ResultController {
 		//batchNoGlobal = req.getParameter("batchNo");
 		System.out.println("FromPathVariable: "+regNoFromPathVariable+" "+courseNoFromPathVariable+" "+examHeldFromPathVariable);
 		try{
-			System.out.println("Deleting...");
-			adminService.deletePreviousRow(regNoFromPathVariable,courseNoFromPathVariable, examHeldFromPathVariable);
-			System.out.println("Deleted.");
-			System.out.println("Inserting...");
-			adminService.insertResult(resultForm); //This insert new row. So previous row remains in db. So at first we will delete prev. row. Then save new row.
-			System.out.println("Inserted.");
+			if(resultForm.getTt1()!="" && resultForm.getTt2()!="" && 
+			   resultForm.getAttendance()!="" && resultForm.getFinalMark()!=""){
+				System.out.println("Deleting...");
+				adminService.deletePreviousRow(regNoFromPathVariable,courseNoFromPathVariable, examHeldFromPathVariable);
+				System.out.println("Deleted.");
+				System.out.println("Inserting...");
+				adminService.insertResult(resultForm); //This insert new row. So previous row remains in db. So at first we will delete prev. row. Then save new row.
+				System.out.println("Inserted.");
+			}
 		}catch(Exception e) {
 			
 			e.printStackTrace();
@@ -129,83 +124,4 @@ public class ResultController {
 		
 		return "redirect:/main/showResultWithGlobalParam";
 	}
-	//For delete
-	/*@RequestMapping(value="/deleteSingleResultShowpage/{id}")
-	public ModelAndView deleteSingleResultShowpager(@PathVariable("id") String id) {
-		
-		ModelAndView model = new ModelAndView("redirect:/main/showResult");
-		try{
-			adminService.deleteSingleResult(id);
-		}catch(Exception e){
-			
-			e.printStackTrace();
-		}
-		return model;
-	}*/
-	//For 'Add More' option, InputForm page show
-	/*@RequestMapping(value="/addSingleResult", method=RequestMethod.GET)
-	public String SubResEntry(Model model){
-		
-		TResultForm resultForm = new TResultForm();
-		List<TResultForm> resultFormList = new ArrayList<TResultForm>();
-		
-		try{
-			resultFormList = adminService.getresultFormList();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		model.addAttribute("resultForm",resultForm);
-		model.addAttribute("resultFormList", resultFormList);
-			
-		return "InputForm";
-	}
-	//For 'Add More' option, InputForm page save
-	@RequestMapping(value="/addSingleResult", method=RequestMethod.POST)
-	public String SubResEntry(@ModelAttribute("resultForm") TResultForm resultForm){
-		
-		try{
-			
-			adminService.insertResult(resultForm);
-			
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		
-		return "redirect:/main/addSingleResult";
-	}
-	// For edit of InputForm.html page after 'Add More'  
-	@RequestMapping(value="/editSingleResult/{id}")
-	public ModelAndView EditUser(@PathVariable("id") String id) {
-		
-		ModelAndView model = new ModelAndView("InputForm");
-		TResultForm resultForm = new TResultForm();
-		List<TResultForm> resultFormList = new ArrayList<TResultForm>();
-		
-		try{
-			//resultForm = adminService.getSingleResultForm(id);
-			resultFormList = adminService.getresultFormList();
-		}catch(Exception e){
-			
-			e.printStackTrace();
-		}
-		model.addObject("resultForm",resultForm);
-		model.addObject("resultFormList", resultFormList);
-		return model;
-	}
-	// For delete of InputForm.html page after 'Add More'  
-	@RequestMapping(value="/deleteSingleResult/{id}")
-	public ModelAndView DeleteSingleResult(@PathVariable("id") String id) {
-		
-		ModelAndView model = new ModelAndView("redirect:/main/addSingleResult");
-		try{
-			adminService.deleteSingleResult(id);
-		}catch(Exception e){
-			
-			e.printStackTrace();
-		}
-		return model;
-	}
-*/
 }

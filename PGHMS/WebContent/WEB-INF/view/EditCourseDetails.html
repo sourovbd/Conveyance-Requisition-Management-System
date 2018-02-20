@@ -10,35 +10,34 @@
 		<fieldset>
 			<legend>Course Details</legend>
 			<div id="box">
-				<form action="#" th:action="@{/main/saveCourseDetails}" th:object="${courseDetailsForm}" method="POST" >
-				<p style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${starMarkedfieldsAreRequired}" />
+				<form action="#" th:action="@{/main/editCourseDetails}" th:object="${courseDetailsForm}" method="POST" >
 				<p>
 					<label>Course No.</label> 
-					<input 	type="text" id="courseNo" name="courseNo" th:field="*{courseNo}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
+					<input 	type="text" id="courseNo" name="courseNo" th:field="*{courseNo}" /> 
 				</p>
 				<p>
 					<label>Course Title</label> 
-					<input 	type="text" id="courseTitle" name="courseTitle" th:field="*{courseTitle}" /><span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
+					<input 	type="text" id="courseTitle" name="courseTitle" th:field="*{courseTitle}" />
 				</p>
 				<p>
 					<label>Course Credit</label> 
-					<input 	type="text" id="courseCredit" name="courseCredit" th:field="*{courseCredit}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
+					<input 	type="text" id="courseCredit" name="courseCredit" th:field="*{courseCredit}" /> 
 				</p>
 				<p>
 					<label>Batch No.</label> 
-					<input 	type="text" id="batchNo" name="batchNo" th:field="*{batchNo}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
+					<input 	type="text" id="batchNo" name="batchNo" th:field="*{batchNo}" /> 
 				</p>
 				<p>
 					<label>Semester</label> 
-					<input 	type="text" id="semester" name="semester" th:field="*{semester}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
+					<input 	type="text" id="semester" name="semester" th:field="*{semester}" /> 
 				</p>
 				<p>
 					<label>Exam year</label> 
-					<input 	type="text" id="examYear" name="examYear" th:field="*{examYear}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
+					<input 	type="text" id="examYear" name="examYear" th:field="*{examYear}" /> 
 				</p>
 				<p>
 					<label>Exam held</label> 
-					<input 	type="text" id="examHeld" name="examHeld" th:field="*{examHeld}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
+					<input 	type="text" id="examHeld" name="examHeld" th:field="*{examHeld}" /> 
 				</p>	
 				<p>
 					<button class="formbutton" name="Submit" type="submit">Submit</button>

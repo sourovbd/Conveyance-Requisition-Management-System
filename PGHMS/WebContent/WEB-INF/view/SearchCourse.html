@@ -15,18 +15,18 @@
 					<label>Select Course No.</label> 
 					<select th:field="*{courseNo}">
                          <option value=""></option>
-                         <option th:each="courseDetails : ${courseDetailsFormList}"
-                            th:value="${courseDetails.courseNo}"
-                            th:utext="${courseDetails.courseNo}"/>
+                         <option th:each="courseDetails : ${courseDetailsFormListCourseNo}"
+                            th:value="${courseDetails}"
+                            th:utext="${courseDetails}"/>
                   </select>
 				</p>
 				<p>
 					<label>Select Batch No.</label> 
 					<select th:field="*{batchNo}">
                          <option value=""></option>
-                         <option th:each="courseDetails : ${courseDetailsFormList}"
-                            th:value="${courseDetails.batchNo}"
-                            th:utext="${courseDetails.batchNo}"/>
+                         <option th:each="courseDetails : ${courseDetailsFormListBatchNo}"
+                            th:value="${courseDetails}"
+                            th:utext="${courseDetails}"/>
                   </select>
 				</p>					
 				<p>

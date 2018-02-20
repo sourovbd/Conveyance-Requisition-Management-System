@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.service.AdminService;
+import com.sv.pghms.util.Constant;
 
 import groovy.ui.SystemOutputInterceptor;
 
@@ -43,6 +44,8 @@ public class CourseController {
 		
 		model.addAttribute("courseDetailsForm",courseDetailsForm);
 		model.addAttribute("courseDetailsFormList", courseDetailsFormList);
+		model.addAttribute("star",Constant.star);
+		model.addAttribute("starMarkedfieldsAreRequired",Constant.starMarkedfieldsAreRequired);
 			
 		return "CourseDetailsEntry";
 	}
@@ -51,10 +54,11 @@ public class CourseController {
 	public String SaveCourseDetails(@ModelAttribute("courseDetailsForm") TCourseDetails courseDetailsForm){
 		
 		try{
-			System.out.println("test: "+globalCourseNo+" "+globalBatchNo );
-			adminService.deleteSingleCourse(globalCourseNo, globalBatchNo);
-			adminService.insertCourseDetails(courseDetailsForm);
-			
+			if(courseDetailsForm.getCourseNo()!="" && courseDetailsForm.getBatchNo()!="" && courseDetailsForm.getCourseTitle()!=""
+			   && courseDetailsForm.getCourseCredit()!="" && courseDetailsForm.getExamHeld()!="" && courseDetailsForm.getExamYear()!=""
+			   && courseDetailsForm.getSemester()!=""){
+				adminService.insertCourseDetails(courseDetailsForm);
+			}		
 		}catch(Exception e) {
 			
 			e.printStackTrace();
@@ -68,16 +72,19 @@ public class CourseController {
 	public String CourseViewPage(Model model){
 
 		TCourseDetails courseDetailsForm = new TCourseDetails();
-		List<TCourseDetails> courseDetailsFormList = new ArrayList<TCourseDetails>();
+		List<String> courseDetailsFormListCourseNo = new ArrayList<String>();
+		List<String> courseDetailsFormListBatchNo = new ArrayList<String>();
 		
 		try{
-			courseDetailsFormList = adminService.getCourseDetailsList();
+			courseDetailsFormListCourseNo = adminService.getcourseDetailsList_courseNo();
+			courseDetailsFormListBatchNo = adminService.getcourseDetailsList_batchNo();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		model.addAttribute("courseDetailsForm",courseDetailsForm);
-		model.addAttribute("courseDetailsFormList", courseDetailsFormList);
+		model.addAttribute("courseDetailsFormListCourseNo", courseDetailsFormListCourseNo);
+		model.addAttribute("courseDetailsFormListBatchNo", courseDetailsFormListBatchNo);
 		
 		return "SearchCourse";
 	}
@@ -105,7 +112,7 @@ public class CourseController {
 	@RequestMapping(value="/editSingleCourse/{courseNo}/{batchNo}")
 	public ModelAndView EditUser(@PathVariable("courseNo") String courseNo, @PathVariable("batchNo")  String batchNo) {
 		
-		ModelAndView model = new ModelAndView("CourseDetailsEntry");
+		ModelAndView model = new ModelAndView("EditCourseDetails");
 		TCourseDetails courseDetailsForm = new TCourseDetails();
 		List<TCourseDetails> courseDetailsFormList = new ArrayList<TCourseDetails>();
 		globalCourseNo = courseNo;
@@ -126,6 +133,39 @@ public class CourseController {
 		model.addObject("courseDetailsForm",courseDetailsForm);
 		model.addObject("courseDetailsFormList", courseDetailsFormList);
 		return model;
+	}
+	@RequestMapping(value="/editCourseDetails", method=RequestMethod.GET)
+	public String EditCourseDetails(Model model){
+		
+		TCourseDetails courseDetailsForm = new TCourseDetails();
+		List<TCourseDetails> courseDetailsFormList = new ArrayList<TCourseDetails>();
+		
+		try{
+			courseDetailsFormList = adminService.getCourseDetailsList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("courseDetailsForm",courseDetailsForm);
+		model.addAttribute("courseDetailsFormList", courseDetailsFormList);
+			
+		return "EditCourseDetails";
+	}
+	@RequestMapping(value="/editCourseDetails", method=RequestMethod.POST)
+	public String EditCourseDetails(@ModelAttribute("courseDetailsForm") TCourseDetails courseDetailsForm){
+		
+		try{
+			System.out.println("test: "+globalCourseNo+" "+globalBatchNo );
+			adminService.deleteSingleCourse(globalCourseNo, globalBatchNo);
+			adminService.insertCourseDetails(courseDetailsForm);
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return "redirect:/main/editCourseDetails";
 	}
 	// For delete 
 	@RequestMapping(value="/deleteSingleCourse/{courseNo}/{batchNo}")
