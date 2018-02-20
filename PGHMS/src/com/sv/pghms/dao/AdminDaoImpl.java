@@ -205,7 +205,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();
-			resultFormList =  session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = 'CSE 375' AND t_examHeld = 'May 2017'").addEntity(TResultForm.class).list();		
+			resultFormList =  session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = 'CSE 375' AND t_examHeld = 'May 2017' order by t_regNo").addEntity(TResultForm.class).list();		
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -229,7 +229,7 @@ public class AdminDaoImpl implements AdminDao{
 		List<TResultForm> resultList = new ArrayList<TResultForm>();
 		try {
 			tx = session.beginTransaction();
-			resultList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 
+			resultList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"' order by t_regNo").addEntity(TResultForm.class).list(); 
 			tx.commit();
 			
 		}catch(Exception e) {
@@ -399,14 +399,14 @@ public class AdminDaoImpl implements AdminDao{
 		return courseDetailsList;
 	}
 	@Override
-	public List<TResultForm>  getresultListFromQuery(String courseNo, String examHeld, String batchNo) {
+	public List<TResultForm>  getresultListFromQuery(String courseNo, String batchNo) {
 	
 		session = sessionFactory.openSession(); 
 		List<TResultForm> resultFormList = new ArrayList<TResultForm>();
 		try {
 			
 			tx = session.beginTransaction();			
-			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_examHeld = '"+examHeld+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
+			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"' order by t_regNo").addEntity(TResultForm.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -634,7 +634,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();			
-			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
+			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"' order by t_regNo").addEntity(TResultForm.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -658,7 +658,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			
 			tx = session.beginTransaction();			
-			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"'").addEntity(TResultForm.class).list(); 			
+			resultFormList = session.createSQLQuery("SELECT * FROM tsms.t_result WHERE t_regNo = '"+regNo+"' AND t_courseNo = '"+courseNo+"' AND t_batchNo = '"+batchNo+"' order by t_regNo").addEntity(TResultForm.class).list(); 			
 			session.getTransaction().commit();
 			
 		}catch(Exception e) {

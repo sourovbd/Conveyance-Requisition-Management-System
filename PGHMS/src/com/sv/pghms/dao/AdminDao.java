@@ -18,7 +18,7 @@ public interface AdminDao {
 	public List<TResultForm> getresultFormList();
 	public List<TResultForm> getSingleResultForm(String regNo, String courseNo, String examHeld, String batchNo);
 	public boolean deleteSingleResult(String id);
-	public List<TResultForm> getresultListFromQuery(String courseNo, String examHeld, String batchNo);
+	public List<TResultForm> getresultListFromQuery(String courseNo, String batchNo);
 	public List<TResultForm> getresultListQuery(String courseNo, String batchNo);
 	public List<TResultForm> getresultListFor3Query(String regNo,String courseNo, String batchNo);
 	public boolean deleteSingleStudent(String regNo, String courseNo, String batchNo);

@@ -11,13 +11,14 @@
 			<legend>Student Registration Form</legend>
 			<div id="box">
 				<form action="#" th:action="@{/main/studentEntry}" th:object="${resultForm}" method="POST" >
+				<p style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${starMarkedfieldsAreRequired}" />
 				<p>
 					<label>Registration No.</label> 
-					<input 	type="text" id="regNo" name="regNo" th:field="*{regNo}" /> 
+					<input 	type="text" id="regNo" name="regNo" th:field="*{regNo}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<label>Name</label> 
-					<input 	type="text" id="name" name="name" th:field="*{name}" />
+					<input 	type="text" id="name" name="name" th:field="*{name}" /> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<label>Select Course No.</label> 
@@ -27,17 +28,7 @@
                          <option th:each="courseDetails : ${courseDetailsList_courseNo}"
                             th:value="${courseDetails}"
                             th:utext="${courseDetails}"/>
-                  </select>
-				</p>
-				<p>
-					<label>Select exam(held) time:</label> 
-					<!-- <input 	type="text" id="examHeld" name="examHeld"  /> --> 
-					<select th:field="*{examHeld}">
-                         <option value=""></option>
-                         <option th:each="courseDetails : ${courseDetailsList_examHeld}"
-                            th:value="${courseDetails}"
-                            th:utext="${courseDetails}"/>
-                  </select>
+                  </select> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<label>Select Batch No.</label> 
@@ -47,7 +38,7 @@
                          <option th:each="courseDetails : ${courseDetailsList_batchNo}"
                             th:value="${courseDetails}"
                             th:utext="${courseDetails}"/>
-                  </select>
+                  </select> <span style="font-weight: bold; font-size: 10px; font-color:red; margin-bottom: 10px;" th:text="${star}"></span>
 				</p>
 				<p>
 					<button class="formbutton" name="Submit" type="submit">Submit</button>
@@ -63,7 +54,6 @@
 					<th>Registration No.</th>
 					<th>Name</th>
 					<th>Coruse No.</th>
-					<th>Exam Held</th>
 					<th>Batch No.</th>
 					<!-- <th></th> -->
 				</tr>
@@ -73,7 +63,6 @@
 					<td th:text="${resultForm.regNo}"></td>
 					<td th:text="${resultForm.name}"></td>
 					<td th:text="${resultForm.courseNo}"></td>
-					<td th:text="${resultForm.examHeld}"></td>
 					<td th:text="${resultForm.batchNo}"></td>
 					<td width="85px"><a th:href="@{'/main/editSingleStudent/'+${resultForm.regNo}+'/'+${resultForm.courseNo}+'/'+${resultForm.batchNo}}">Edit</a> |
 						    <a th:href="@{'/main/deleteSingleStudent/'+${resultForm.regNo}+'/'+${resultForm.courseNo}+'/'+${resultForm.batchNo}}">Delete</a>

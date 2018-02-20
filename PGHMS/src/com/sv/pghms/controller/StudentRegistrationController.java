@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sv.pghms.model.TCourseDetails;
 import com.sv.pghms.model.TResultForm;
 import com.sv.pghms.service.AdminService;
+import com.sv.pghms.util.Constant;
 
 @Controller
 @RequestMapping("/main")
@@ -28,7 +29,7 @@ public class StudentRegistrationController {
 	@Autowired
 	private AdminService adminService;
 		
-	String editRegNoGlobal, courseNoGlobal, examHeldGlobal, batchNoGlobal;
+	String editRegNoGlobal, courseNoGlobal, batchNoGlobal;
 	
 	@RequestMapping(value="/studentEntry", method=RequestMethod.GET)
 	public String getBatchDetails(Model model){
@@ -36,18 +37,15 @@ public class StudentRegistrationController {
 		TResultForm resultForm = new TResultForm();
 		List<TResultForm> resultFormList = new ArrayList<TResultForm>();
 		
-		String courseDetails = new String();
+		String courseDetails = new String(); // No need
 		List<String> courseDetailsList_courseNo = new ArrayList<String>();
-		List<String> courseDetailsList_examHeld = new ArrayList<String>();
 		List<String> courseDetailsList_batchNo = new ArrayList<String>();
 				
 		try{
 			
 			courseDetailsList_courseNo = adminService.getcourseDetailsList_courseNo();
-			courseDetailsList_examHeld = adminService.getcourseDetailsList_examHeld();
-			courseDetailsList_batchNo = adminService.getcourseDetailsList_batchNo();
-			
-			resultFormList = adminService.getresultListFromQuery(courseNoGlobal,examHeldGlobal,batchNoGlobal);
+			courseDetailsList_batchNo = adminService.getcourseDetailsList_batchNo();		
+			resultFormList = adminService.getresultListFromQuery(courseNoGlobal,batchNoGlobal);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -55,25 +53,27 @@ public class StudentRegistrationController {
 		model.addAttribute("resultForm",resultForm);
 		model.addAttribute("resultFormList", resultFormList);
 		
-		model.addAttribute("courseDetails",courseDetails);
+		model.addAttribute("courseDetails",courseDetails); // No need
 		model.addAttribute("courseDetailsList_courseNo", courseDetailsList_courseNo);
-		model.addAttribute("courseDetailsList_examHeld", courseDetailsList_examHeld);
 		model.addAttribute("courseDetailsList_batchNo", courseDetailsList_batchNo);
+		model.addAttribute("star",Constant.star);
+		model.addAttribute("starMarkedfieldsAreRequired",Constant.starMarkedfieldsAreRequired);
 		
 		return "StudentEntry";
 	}
 	//For 'Add More' option, InputForm page save
 	@RequestMapping(value="/studentEntry", method=RequestMethod.POST)
-	public String saveBatchDetails(@ModelAttribute("resultForm") TResultForm resultForm, @RequestParam("courseNo") String courseNo, @RequestParam("examHeld") String examHeld, @RequestParam("batchNo") String batchNo, HttpServletRequest req){
+	public String saveBatchDetails(@ModelAttribute("resultForm") TResultForm resultForm, @RequestParam("courseNo") String courseNo, @RequestParam("batchNo") String batchNo, HttpServletRequest req){
 		
 		courseNoGlobal = courseNo;
-		examHeldGlobal = examHeld;
 		batchNoGlobal = req.getParameter("batchNo");//batchNo;
 		
 		try{
+			if(resultForm.getName()!="" && resultForm.getRegNo()!="" && 
+			   resultForm.getCourseNo()!="" && resultForm.getBatchNo()!=""){
 			adminService.deletePreviousROW(editRegNoGlobal, courseNo, batchNo);
 			adminService.insertBatch(resultForm);
-			
+			}
 		}catch(Exception e) {
 			
 			e.printStackTrace();
@@ -87,18 +87,19 @@ public class StudentRegistrationController {
 	public String CourseViewPage(Model model){
 				
 		TResultForm resultForm = new TResultForm();
-		TCourseDetails courseDetails = new TCourseDetails();
-		List<TCourseDetails> courseDetailsList = new ArrayList<TCourseDetails>();
+		List<String> courseDetailsListCourseNo = new ArrayList<String>();
+		List<String> courseDetailsListBatchNo = new ArrayList<String>();
 				
 		try{
-			courseDetailsList = adminService.getCourseDetailsList();
+			courseDetailsListCourseNo = adminService.getcourseDetailsList_courseNo();
+			courseDetailsListBatchNo = adminService.getcourseDetailsList_batchNo();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		model.addAttribute("resultForm",resultForm);
-		model.addAttribute("courseDetails",courseDetails);
-		model.addAttribute("courseDetailsList", courseDetailsList);
+		model.addAttribute("courseDetailsListCourseNo", courseDetailsListCourseNo);
+		model.addAttribute("courseDetailsListBatchNo", courseDetailsListBatchNo);
 				
 		return "SearchStudent";
 	}
@@ -109,11 +110,8 @@ public class StudentRegistrationController {
 		TResultForm resultForm = new TResultForm();
 		List<TResultForm> resultFormList = new ArrayList<TResultForm>();
 		
-		System.out.println("courseNo: "+courseNo);
-		System.out.println("batchNo: "+batchNo);
 		try{
 			resultFormList = adminService.getresultListQuery(courseNo, batchNo);
-			System.out.println("resultFormList: "+resultFormList);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -133,12 +131,15 @@ public class StudentRegistrationController {
 		
 		TCourseDetails courseDetails = new TCourseDetails();
 		List<TCourseDetails> courseDetailsList = new ArrayList<TCourseDetails>();
-		
+		List<String> courseDetailsList_courseNo = new ArrayList<String>();
+		List<String> courseDetailsList_batchNo = new ArrayList<String>();
+
 		editRegNoGlobal = regNo;
 		System.out.println("editRegNoGlobal: "+editRegNoGlobal);
 		
 		try{
-			courseDetailsList = adminService.getCourseDetailsList();
+			courseDetailsList_courseNo = adminService.getcourseDetailsList_courseNo();
+			courseDetailsList_batchNo = adminService.getcourseDetailsList_batchNo();
 			resultFormList = adminService.getresultListFor3Query(regNo, courseNo, batchNo);
 			System.out.println("resultFormList: "+resultFormList);
 		}catch(Exception e){
@@ -154,6 +155,10 @@ public class StudentRegistrationController {
 		model.addObject("resultFormList", resultFormList);
 		model.addObject("courseDetails",courseDetails);
 		model.addObject("courseDetailsList", courseDetailsList);
+		model.addObject("courseDetailsList_courseNo", courseDetailsList_courseNo);
+		model.addObject("courseDetailsList_batchNo", courseDetailsList_batchNo);
+		model.addObject("star",Constant.star);
+		model.addObject("starMarkedfieldsAreRequired",Constant.starMarkedfieldsAreRequired);
 		
 		return model;
 	}

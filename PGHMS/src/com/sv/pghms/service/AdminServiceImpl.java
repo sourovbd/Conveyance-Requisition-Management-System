@@ -79,9 +79,9 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public List<TResultForm> getresultListFromQuery(String courseNo, String examHeld, String batchNo) {
+	public List<TResultForm> getresultListFromQuery(String courseNo, String batchNo) {
 		
-		return adminDao.getresultListFromQuery(courseNo, examHeld, batchNo);
+		return adminDao.getresultListFromQuery(courseNo, batchNo);
 	}
 
 	@Override
