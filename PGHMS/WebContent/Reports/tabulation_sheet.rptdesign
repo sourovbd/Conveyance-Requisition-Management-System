@@ -2,44 +2,6 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
     <html-property name="description">This is created for tabulation sheet of single course.</html-property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">odaDriverClass</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">odaURL</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">odaUser</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">odaAutoCommit</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">odaIsolationMode</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">odaPassword</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">odaJndiName</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileName</property>
-            <property name="id">221</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileStorePath</property>
-            <property name="id">221</property>
-        </structure>
-    </list-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="layoutPreference">fixed layout</property>
@@ -160,7 +122,6 @@
         </scalar-parameter>
     </parameters>
     <data-sources>
-        <script-data-source name="srcStocks" id="8"/>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="testDbDataSource" id="221">
             <list-property name="privateDriverProperties">
                 <ex-property>
@@ -185,122 +146,6 @@
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <script-data-set name="dataSetSocks" id="9">
-            <list-property name="resultSetHints">
-                <structure>
-                    <property name="position">0</property>
-                    <property name="name">columnDate</property>
-                    <property name="dataType">date</property>
-                </structure>
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">columnOpen</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">columnHigh</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">columnLow</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">columnClose</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">columnVolume</property>
-                    <property name="dataType">integer</property>
-                </structure>
-            </list-property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">columnDate</property>
-                    <text-property name="displayName">Date</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">columnOpen</property>
-                    <text-property name="displayName">Open</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">columnHigh</property>
-                    <text-property name="displayName">High</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">columnLow</property>
-                    <text-property name="displayName">Low</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">columnClose</property>
-                    <text-property name="displayName">Close</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">columnVolume</property>
-                    <text-property name="displayName">Volume</text-property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">columnDate</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">columnOpen</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">columnHigh</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">columnLow</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">columnClose</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">columnVolume</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">srcStocks</property>
-            <method name="open"><![CDATA[count = 0;
-
-// create instance of
-// the GetStockHistory class
-gsh = new Packages.de.vogella.birt.stocks.daomock.StockDaoMock();
-
-//Load the List
-
-stock = gsh.getStockValues("Java");]]></method>
-            <method name="fetch"><![CDATA[if(count < stock.size()){
-       row["columnDate"] = stock.get(count).getDate();
-       row["columnOpen"] = stock.get(count).getOpen();
-       row["columnHigh"] = stock.get(count).getHigh();
-       row["columnLow"] = stock.get(count).getLow();
-       row["columnClose"] = stock.get(count).getClose();
-       row["columnVolume"] = stock.get(count).getVolume();
-       count++;
-       return true;
-}
-
-return false;]]></method>
-        </script-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="dataSetTestDb" id="222">
             <property name="nullsOrdering">nulls lowest</property>
             <list-property name="columnHints">
@@ -441,6 +286,62 @@ where course_no like ?
 and semester_year like ?
 order by Reg_no asc;]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="419">
+            <list-property name="columnHints"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">semesterNumber</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-1</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">1</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">chairamName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">testDbDataSource</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">chairamName</property>
+                    <property name="nativeName">chairamName</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select chairamName
+from t_semesterinfo where semesterNumber = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -478,27 +379,10 @@ order by Reg_no asc;]]></xml-property>
     </styles>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
-            <property name="topMargin">0.19791666666666666in</property>
-            <property name="leftMargin">0.375in</property>
-            <property name="bottomMargin">0.4375in</property>
+            <property name="topMargin">0.3645833333333333in</property>
+            <property name="leftMargin">0.4166666666666667in</property>
+            <property name="bottomMargin">0.4270833333333333in</property>
             <property name="rightMargin">0.4270833333333333in</property>
-            <page-header>
-                <data id="411">
-                    <property name="fontSize">12pt</property>
-                    <property name="fontWeight">bold</property>
-                    <property name="textAlign">center</property>
-                    <property name="display">block</property>
-                    <list-property name="boundDataColumns">
-                        <structure>
-                            <property name="name">HeaderText</property>
-                            <text-property name="displayName">HeaderText</text-property>
-                            <expression name="expression" type="javascript">vars["HeaderText"]</expression>
-                            <property name="dataType">string</property>
-                        </structure>
-                    </list-property>
-                    <property name="resultSetColumn">HeaderText</property>
-                </data>
-            </page-header>
             <page-footer>
                 <data id="412">
                     <list-property name="boundDataColumns">
@@ -562,6 +446,36 @@ order by Reg_no asc;]]></xml-property>
                 <property name="width">1.2083333333333333in</property>
             </column>
             <header>
+                <row id="414">
+                    <property name="fontWeight">bold</property>
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="textAlign">left</property>
+                    <property name="height">1.4166666666666667in</property>
+                    <cell id="415">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <data id="411">
+                            <property name="fontSize">10pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="display">block</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">HeaderText</property>
+                                    <text-property name="displayName">HeaderText</text-property>
+                                    <expression name="expression" type="javascript">vars["HeaderText"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">HeaderText</property>
+                        </data>
+                    </cell>
+                </row>
                 <row id="373">
                     <property name="fontWeight">bold</property>
                     <property name="borderBottomStyle">solid</property>
@@ -636,11 +550,11 @@ Letter</text-property>
             </detail>
             <footer>
                 <row id="383">
-                    <property name="height">0.22916666666666666in</property>
-                    <cell id="384"/>
-                    <cell id="385"/>
-                    <cell id="386"/>
-                    <cell id="387"/>
+                    <property name="height">0.21875in</property>
+                    <cell id="384">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                    </cell>
                 </row>
             </footer>
         </table>
@@ -663,7 +577,7 @@ res+='\n'&#13;
 res+='Registered but disqualified = F'+'\n'&#13;
 res+='\n'&#13;
 vars["HeaderText"]='TABULATION SHEET\n'+res</expression>
-            <property name="type">page</property>
+            <property name="type">report</property>
         </variable-element>
         <variable-element name="FooterText">
             <expression name="value" type="javascript">var footer = 'Signature and date of the Chairman _______________________'+'\n'&#13;
