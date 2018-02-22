@@ -10,4 +10,3 @@ Team members:
 
 Md. Atequer Rahman Sourov
 
-Ahsan Kabir Shohagh.
