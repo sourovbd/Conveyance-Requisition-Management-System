@@ -17,10 +17,10 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/tsms" />
-		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://asdserver03:1433;databaseName=CMS" />
+		<property name="username" value="asdinc" />
+		<property name="password" value="ASD007" />
 	</bean>
     
     <bean id="sessionFactory"
@@ -35,32 +35,60 @@
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.connection.pool_size">1</prop>
-     			<prop key="hibernate.hbm2ddl.auto">Update</prop>
+     			<prop key="hibernate.hbm2ddl.auto">update</prop>
      			<prop key="hibernate.connection.SetBigStringTryBlob">true</prop> 
 			</props>
 		</property>
 	</bean>
 	
-	<bean id="customUserDetailsService" class="com.sv.pghms.service.CustomUserDetailsServiceImpl">
-	</bean> 
-
-	<bean id="customUserDetailsDao" class="com.sv.pghms.dao.CustomUserDetailsDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />  
-	</bean>
-
-	<bean id="userService" class="com.sv.pghms.service.UserServiceImpl">
+	<bean id="expenseService" class="com.asd.cms.service.ExpenseServiceImpl">
 	</bean> 
 	
-	<bean id="userDao" class="com.sv.pghms.dao.UserDaoImpl">
+	<bean id="expenseDao" class="com.asd.cms.dao.ExpenseDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />  
 	</bean>
 	
-	 <bean id="adminService" class="com.sv.pghms.service.AdminServiceImpl">
+	<bean id="requisitionService" class="com.asd.cms.service.RequisitionServiceImpl">
 	</bean> 
 	
-	 <bean id="adminDao" class="com.sv.pghms.dao.AdminDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />   
+	<bean id="requisitionDao" class="com.asd.cms.dao.RequisitionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="adminService" class="com.asd.cms.service.AdminServiceImpl">
 	</bean> 
+	
+	<bean id="adminDao" class="com.asd.cms.dao.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="hrService" class="com.asd.cms.service.HrServiceImpl">
+	</bean> 
+	
+	<bean id="hrDao" class="com.asd.cms.dao.HrDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="customUserDetailsService" class="com.asd.cms.service.CustomUserDetailsServiceImpl">
+	</bean> 
+
+	<bean id="customUserDetailsDao" class="com.asd.cms.dao.CustomUserDetailsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="userService" class="com.asd.cms.service.UserServiceImpl">
+	</bean> 
+	
+	<bean id="userDao" class="com.asd.cms.dao.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
+	
+	<bean id="userWiseReportService" class="com.asd.cms.service.UserWiseReportServiceImpl">
+	</bean> 
+	
+	<bean id="userWiseDao" class="com.asd.cms.dao.UserWiseDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />  
+	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />	
 	

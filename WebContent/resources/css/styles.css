@@ -1,5 +1,5 @@
 body {
-	background: #FFF url('/PGHMS/resources/images/body-noheader.png') repeat-x scroll top left;
+	background: #FFF url('/CMS/resources/images/body-noheader.png') repeat-x scroll top left;
 	margin:0;
 	padding:0;
 	font-family: Verdana, Geneva, sans-serif;
@@ -8,11 +8,11 @@ body {
 }
 
 body.homepage {
-	background: #FFF url('/PGHMS/resources/images/body.png') repeat-x scroll top left;
+	background: #FFF url('/CMS/resources/images/body.png') repeat-x scroll top left;
 }
 
 body.noheader {
-	background: #FFF url('/PGHMS/resources/images/body-noheader.png') repeat-x scroll top left;
+	background: #FFF url('/CMS/resources/images/body-noheader.png') repeat-x scroll top left;
 }
 
 * {
@@ -32,9 +32,9 @@ th, td {
 
 th { /* for black - h4-black.png; for green - h4.png */
 	color: #fff;
-	background: #48913C url(/PGHMS/resources/images/ash.png) repeat-x scroll center center;
-	/* background: #48913C url(/PGHMS/resources/images/h4-black.png) repeat-x scroll center center; */
-	/* background: url(/PGHMS/resources/images/table/table_header_repeat.jpg) repeat-x; */
+	background: #48913C url(/CMS/resources/images/ash.png) repeat-x scroll center center;
+	/* background: #48913C url(/CMS/resources/images/h4-black.png) repeat-x scroll center center; */
+	/* background: url(/CMS/resources/images/table/table_header_repeat.jpg) repeat-x; */
 }
 
 td {
@@ -129,7 +129,7 @@ form select {
 }
 form input.formbutton, button.formbutton {
 	border: none;
-	background: #48913C url(/PGHMS/resources/images/ash.png) repeat-x scroll center center;
+	background: #48913C url(/CMS/resources/images/ash.png) repeat-x scroll center center;
 	color: #ffffff;
 	font-weight: bold;
 	padding: 5px 8px;
@@ -142,7 +142,7 @@ form input.formbutton, button.formbutton {
 
 .button{ /* for grey-black - h4-black.png; for green - h4.png */
 	border: none;
-	background: #48913C url(/PGHMS/resources/images/ash.png) repeat-x scroll center center;  
+	background: #48913C url(/CMS/resources/images/ash.png) repeat-x scroll center center;  
 	color: #ffffff;                                                                              
 	font-weight: bold;
 	padding: 5px 8px;
@@ -241,7 +241,7 @@ ul.styledlist {
 }
 
 ul.styledlist li {
-	background: #fff url('/PGHMS/resources/images/list-item.gif') no-repeat scroll left center;
+	background: #fff url('/CMS/resources/images/list-item.gif') no-repeat scroll left center;
 	padding-left: 15px;
 	padding-bottom: 0;
 	margin-bottom: 5px;
@@ -327,12 +327,12 @@ ul.styledlist li {
 }
 
 #nav ul li a.has_submenu {
-	background: transparent url('/PGHMS/resources/images/submenu-item.gif') no-repeat scroll right center;
+	background: transparent url('/CMS/resources/images/submenu-item.gif') no-repeat scroll right center;
 	padding-right: 30px;
 }
 
 #nav ul li a.has_submenu:hover, #nav ul li.sfHover a.has_submenu {
-	background-image: url('/PGHMS/resources/images/submenu-item-hover.gif');
+	background-image: url('/CMS/resources/images/submenu-item-hover.gif');
 }
 
 
@@ -447,7 +447,7 @@ div#slides-container div.jFlowSlideContainer div.slide-image {
 	padding-top: 0px;
 }
 span.jFlowPrev, span.jFlowNext {
-	background-image:url('/PGHMS/resources/images/slide-prev.gif');
+	background-image:url('/CMS/resources/images/slide-prev.gif');
 	background-repeat:no-repeat;
 	display:block;
 	height:41px;
@@ -458,7 +458,7 @@ span.jFlowPrev, span.jFlowNext {
 }
 span.jFlowPrev span, span.jFlowNext span { display:none; }
 span.jFlowNext {
-	background-image:url('/PGHMS/resources/images/slide-next.gif');
+	background-image:url('/CMS/resources/images/slide-next.gif');
 	float:right;
 }
 div#slides-container div.controls {
@@ -604,11 +604,11 @@ div#sub-header h2 {
 	line-height: 1.9em;
 	padding: 5px 5px 5px 10px;
 	font-weight: bold;
-	background: #333 url('/PGHMS/resources/images/h4-black.png') repeat-x center;
+	background: #333 url('/CMS/resources/images/h4-black.png') repeat-x center;
 }
 
 .sidebar h4.h4-green {
-	background: #48913C url('/PGHMS/resources/images/h4.png') repeat-x center;
+	background: #48913C url('/CMS/resources/images/h4.png') repeat-x center;
 	border-bottom: 1px solid #2C5A26;
 }
 
@@ -620,7 +620,7 @@ div#sub-header h2 {
 
 #footer {
 	margin:0 auto;
-	background: #000 url('/PGHMS/resources/images/footer.jpg') repeat-x scroll bottom left;
+	background: #000 url('/CMS/resources/images/footer.jpg') repeat-x scroll bottom left;
 	/* padding: 30px 5px 0; */
 }
 
@@ -731,7 +731,7 @@ div#footer-links p {
 /* New CSS */
  
  .table-header-check	{
-	background: url(/PGHMS/resources/images/table/table_header_checkbox.jpg) no-repeat;
+	background: url(/CMS/resources/images/table/table_header_checkbox.jpg) no-repeat;
 	border: none;
 	min-width: 29px;
 	padding: 0px 0 0 10px;

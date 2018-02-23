@@ -7,7 +7,7 @@
 	   		http://www.springframework.org/schema/context
 	   		http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	
-	<bean id="utilities" class="com.sv.pghms.util.Utilities"/>
+	<bean id="utilities" class="com.asd.cms.util.Utilities"/>
 	
 	<!-- <bean id="transactionExcelView" class="org.asd.pms.excelbuilder.TransactionBuilder" />
 	<bean id="eligibilityExcelView" class="org.asd.pms.excelbuilder.EligibilityCheckBuilder" /> -->

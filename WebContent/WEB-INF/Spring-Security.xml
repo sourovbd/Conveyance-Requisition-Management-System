@@ -32,9 +32,9 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	<bean id="customUserDetailsService" class="com.sv.pghms.service.CustomUserDetailsServiceImpl" />
-	<bean id="loginSuccessHandler" class="com.sv.pghms.service.LoginSuccessHandlerService" />
-	<bean id="loginFailureHandler" class="com.sv.pghms.service.LoginFailureHandlerService" />
+	<bean id="customUserDetailsService" class="com.asd.cms.service.CustomUserDetailsServiceImpl" />
+	<bean id="loginSuccessHandler" class="com.asd.cms.service.LoginSuccessHandlerService" />
+	<bean id="loginFailureHandler" class="com.asd.cms.service.LoginFailureHandlerService" />
 
 </beans>
 

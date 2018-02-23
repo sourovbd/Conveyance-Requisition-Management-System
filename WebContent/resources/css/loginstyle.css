@@ -59,7 +59,7 @@ body {
   font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
   color: #404040;
   /* background: #0ca3d2; */
- background: #ddd url('/PGHMS/resources/images/bg.png');
+ background: #ddd url('/PMS/resources/images/bg.png');
 }
 
 .container {
@@ -195,7 +195,7 @@ input[type=submit] {
   text-shadow: 0 1px #e3f1f1;
   /* background: #cde5ef; */
  /*  background-color: green; */
-  background: #48913C url(/PGHMS/resources/images/h4.png) repeat-x scroll center center;
+  background: #48913C url(/PMS/resources/images/h4.png) repeat-x scroll center center;
   border: 1px solid;
   border-color: #b4ccce #b3c0c8 #9eb9c2;
   border-radius: 16px;

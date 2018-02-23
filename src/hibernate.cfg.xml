@@ -5,15 +5,17 @@
 <hibernate-configuration>
 					<!-- Related to the connection START -->
     <session-factory name="sessionFactory">
-       
+        <!-- <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.password">ASD007</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=CMS</property>
+        <property name="hibernate.connection.username">sa</property> -->
+        
         			<!-- Related to hibernate properties START -->
-        <property name="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         
         			<!-- Related to mapping START -->
-      
-        <mapping class="com.sv.pghms.model.TUser" />
-        <mapping class="com.sv.pghms.model.TResultForm" />
-        <mapping class="com.sv.pghms.model.TCourseDetails" />
-       
+        <mapping class="com.asd.cms.model.TExpense" />
+        <mapping class="com.asd.cms.model.TUser" />
+        <mapping class="com.asd.cms.model.TRequisition" />
     </session-factory>
 </hibernate-configuration>
