@@ -17,10 +17,10 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 
-		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url" value="jdbc:sqlserver://asdserver03:1433;databaseName=CMS" />
-		<property name="username" value="asdinc" />
-		<property name="password" value="ASD007" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/cms" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
 	</bean>
     
     <bean id="sessionFactory"

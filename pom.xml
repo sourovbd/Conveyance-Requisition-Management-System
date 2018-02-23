@@ -128,6 +128,13 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
+						<!-- MySql jar -->
+	
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
 					<!-- Database connection pool -->
 					
 		<dependency>

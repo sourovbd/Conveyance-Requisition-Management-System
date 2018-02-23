@@ -11,7 +11,7 @@
         <property name="hibernate.connection.username">sa</property> -->
         
         			<!-- Related to hibernate properties START -->
-        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</property>
         
         			<!-- Related to mapping START -->
         <mapping class="com.asd.cms.model.TExpense" />
